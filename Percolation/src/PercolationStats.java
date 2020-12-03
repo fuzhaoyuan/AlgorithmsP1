@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.StdStats;
 public class PercolationStats {
     private double[] xt;
     private int t;
-    private int m;
+    private double m;
     private double mean;
     private double stddev;
     private double confidenceLo;
@@ -15,12 +15,12 @@ public class PercolationStats {
         validate(n,trials);
         xt = new double[trials];
         t = trials;
+        m = n*n;
         for(int t=0; t<trials; t++){
-            System.out.println("正在跑第" + t + "次");
             Percolation pclt = new Percolation(n);
             while (!pclt.percolates()){
                 pclt.open(StdRandom.uniform(n)+1,StdRandom.uniform(n)+1); }
-            xt[t] = pclt.numberOfOpenSites()/(n*n);
+            xt[t] = pclt.numberOfOpenSites()/m;
         }
     }
 
