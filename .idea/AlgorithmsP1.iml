@@ -13,11 +13,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../Input/Algorithms_Part1/Week1/algs4.jar!/" />
+          <root url="jar://$MODULE_DIR$/JARs/algs4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/../../../Input/Algorithms_Part1/Week1/algs4.jar!/" />
+          <root url="jar://$MODULE_DIR$/JARs/algs4.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
