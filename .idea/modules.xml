@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/AlgorithmsP1.iml" filepath="$PROJECT_DIR$/.idea/AlgorithmsP1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Deques and Randomized Queues/Deques and Randomized Queues.iml" filepath="$PROJECT_DIR$/Deques and Randomized Queues/Deques and Randomized Queues.iml" />
       <module fileurl="file://$PROJECT_DIR$/Percolation/Percolation.iml" filepath="$PROJECT_DIR$/Percolation/Percolation.iml" />
     </modules>
   </component>
