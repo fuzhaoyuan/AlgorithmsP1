@@ -86,7 +86,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public boolean hasNext() {
-            return current != last;
+            return current != last.next;
         }
 
         @Override
@@ -115,7 +115,7 @@ public class Deque<Item> implements Iterable<Item> {
         deque.removeFirst();
         deque.addFirst(8);
         Iterator<Integer> test = deque.iterator();
-        for(int i=0;i<6;i++) System.out.print(test.next());
+        while(test.hasNext()) System.out.print(test.next());
     }
 
 }
