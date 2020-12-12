@@ -68,6 +68,7 @@ public class Deque<Item> implements Iterable<Item> {
         if(newLast != last){
             while(newLast.next != last) newLast = newLast.next;
             last = newLast;
+            last.next = null;
         }else {
             first = null;
             last = null;
@@ -107,15 +108,11 @@ public class Deque<Item> implements Iterable<Item> {
     public static void main(String[] args){
         Deque<Integer> deque = new Deque<Integer>();
         deque.addFirst(1);
-        deque.addFirst(2);
-        deque.addFirst(3);
-        deque.addFirst(4);
-        deque.addFirst(5);
-        deque.addFirst(6);
+        deque.addLast(2);
         deque.removeFirst();
-        deque.addFirst(8);
-        Iterator<Integer> test = deque.iterator();
-        while(test.hasNext()) System.out.print(test.next());
+        deque.addFirst(4);
+        deque.removeFirst();
+        deque.removeFirst();
     }
 
 }

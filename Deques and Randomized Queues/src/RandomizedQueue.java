@@ -30,6 +30,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if(enq == rq.length){
             if(enq != size) rq = sort(rq.length);
             else rq = sort(2 * rq.length);
+            refreshRand();
         }
         rq[enq++] = item;
         size++;
@@ -38,11 +39,15 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // remove and return a random item
     public Item dequeue(){
         if(isEmpty()) throw new NoSuchElementException();
+        refreshRand();
         while(rq[rand] == null) refreshRand();
         Item item = rq[rand];
         rq[rand] = null;
         size--;
-        if(size == rq.length/4) rq = sort(rq.length/2);
+        if(size == rq.length/4){
+            rq = sort(rq.length/2);
+            refreshRand();
+        }
         return item;
     }
 
