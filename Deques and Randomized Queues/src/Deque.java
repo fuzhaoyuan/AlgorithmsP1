@@ -87,12 +87,12 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public boolean hasNext() {
-            return current != last.next;
+            return current != null;
         }
 
         @Override
         public Item next() {
-            if(current == last.next) throw new NoSuchElementException();
+            if(current == null) throw new NoSuchElementException();
             Item item = current.item;
             current = current.next;
             return item;
@@ -108,11 +108,15 @@ public class Deque<Item> implements Iterable<Item> {
     public static void main(String[] args){
         Deque<Integer> deque = new Deque<Integer>();
         deque.addFirst(1);
-        deque.addLast(2);
         deque.removeFirst();
+        deque.addFirst(3);
         deque.addFirst(4);
         deque.removeFirst();
         deque.removeFirst();
+        deque.addFirst(7);
+        deque.addFirst(8);
+        Iterator<Integer> test = deque.iterator();
+        while(test.hasNext()) System.out.print(test.next());
     }
 
 }

@@ -44,7 +44,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         Item item = rq[rand];
         rq[rand] = null;
         size--;
-        if(size == rq.length/4){
+        if(size != 0 && size == rq.length/4){
             rq = sort(rq.length/2);
             refreshRand();
         }
@@ -104,16 +104,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // unit testing (required)
     public static void main(String[] args){
         RandomizedQueue<Integer> rq = new RandomizedQueue<Integer>();
-        rq.enqueue(914);
-        rq.enqueue(280);
-        rq.enqueue(950);
-        rq.enqueue(972);
-        rq.enqueue(45);
-        rq.enqueue(114);
-        rq.dequeue();
-        rq.enqueue(933);
-        rq.enqueue(296);
-        rq.enqueue(599);
+        rq.enqueue(0);
+        rq.enqueue(1);
+        rq.enqueue(2);
+        rq.enqueue(3);
+        for(int n=0;n<4;n++) System.out.print(rq.dequeue());
     }
 
 }
