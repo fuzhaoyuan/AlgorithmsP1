@@ -26,7 +26,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // add the item
     public void enqueue(Item item){
-        if(item.equals(null)) throw new IllegalArgumentException();
+        if(item == null) throw new IllegalArgumentException();
         if(enq == rq.length){
             if(enq != size) rq = sort(rq.length);
             else rq = sort(2 * rq.length);
@@ -63,8 +63,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         for(int s=0; s< rq.length; s++){
             if(rq[s] != null) sort[n++] = rq[s];
         }
-        if(capacity == rq.length/2) enq = n;
-        rand = 0;
+        if(capacity == rq.length/2 || capacity == rq.length) enq = n;
         return sort;
     }
 
@@ -72,22 +71,22 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Iterator<Item> iterator(){
         rqForIt = sort(size);
         StdRandom.shuffle(rqForIt);
-        return new RandomizedQueue.ListIterator();
+        return new ListIterator();
     }
 
     private class ListIterator implements Iterator<Item>{
         private int current = 0;
+        private final Item[] rqForLI = rqForIt;
 
         @Override
         public boolean hasNext() {
-            return current != size;
+            return current != rqForLI.length;
         }
 
         @Override
         public Item next() {
-            if(current == size) throw new NoSuchElementException();
-            Item item = rqForIt[current++];
-            return item;
+            if(current == rqForLI.length) throw new NoSuchElementException();
+            return rqForLI[current++];
         }
 
         @Override
@@ -98,17 +97,17 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // unit testing (required)
     public static void main(String[] args){
-        int n = 5;
-        RandomizedQueue<Integer> queue = new RandomizedQueue<Integer>();
-        for (int i = 0; i < n; i++)
-            queue.enqueue(i);
-        for (int a : queue) {
-            for (int b : queue)
-                System.out.print(a + "-" + b + " ");
-            System.out.println();
-        }
-        for (int i=0;i<17;i++) queue.enqueue(i);
-        for (int i=0;i<17;i++) System.out.print(queue.sample() + " ");
+        RandomizedQueue<Integer> rq = new RandomizedQueue<Integer>();
+        rq.enqueue(914);
+        rq.enqueue(280);
+        rq.enqueue(950);
+        rq.enqueue(972);
+        rq.enqueue(45);
+        rq.enqueue(114);
+        rq.dequeue();
+        rq.enqueue(933);
+        rq.enqueue(296);
+        rq.enqueue(599);
     }
 
 }

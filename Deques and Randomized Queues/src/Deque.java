@@ -68,6 +68,9 @@ public class Deque<Item> implements Iterable<Item> {
         if(newLast != last){
             while(newLast.next != last) newLast = newLast.next;
             last = newLast;
+        }else {
+            first = null;
+            last = null;
         }
         size--;
         return item;
@@ -88,7 +91,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
-            if(current == last) throw new NoSuchElementException();
+            if(current == last.next) throw new NoSuchElementException();
             Item item = current.item;
             current = current.next;
             return item;
@@ -102,15 +105,17 @@ public class Deque<Item> implements Iterable<Item> {
 
     // unit testing (required)
     public static void main(String[] args){
-        int n = 5;
-        Deque<Integer> queue = new Deque<Integer>();
-        for (int i = 0; i < n; i++)
-            queue.addFirst(i);
-        for (int a : queue) {
-            for (int b : queue)
-                System.out.print(a + "-" + b + " ");
-            System.out.println();
-        }
+        Deque<Integer> deque = new Deque<Integer>();
+        deque.addFirst(1);
+        deque.addFirst(2);
+        deque.addFirst(3);
+        deque.addFirst(4);
+        deque.addFirst(5);
+        deque.addFirst(6);
+        deque.removeFirst();
+        deque.addFirst(8);
+        Iterator<Integer> test = deque.iterator();
+        for(int i=0;i<6;i++) System.out.print(test.next());
     }
 
 }
