@@ -1,9 +1,16 @@
 
 public class FastCollinearPoints {
     private int numberOfSegments;
-    private LineSegment[] segments;
+    private Node lineSegments = null;
+    private Node first = null;
     private SloPoint[] sloPoints;
     private SloPoint[] aux;
+
+    private class Node
+    {
+        LineSegment segment;
+        Node next;
+    }
 
     private class SloPoint{
         Point point;
@@ -11,8 +18,15 @@ public class FastCollinearPoints {
     }
 
     public FastCollinearPoints(Point[] points){
+        if(points == null) throw new IllegalArgumentException();
         int N = points.length;
-        segments = new LineSegment[N-3];
+        for(int i = 0; i < N; i++){
+            if(points[i] == null) throw new IllegalArgumentException();
+            for(int j = 0; j < N && j != i; j++){
+                if(points[j] == points[i]) throw new IllegalArgumentException();
+            }
+        }
+
         sloPoints = new SloPoint[N];
         aux = new SloPoint[N];
         for(int p = 0; p < N; p++){
@@ -25,10 +39,6 @@ public class FastCollinearPoints {
             mergeSort(sloPoints, aux, 0, N-1);
             findSegments();
         }
-
-        LineSegment[] auxSegments = new LineSegment[numberOfSegments];
-        for(int n = 0; n < numberOfSegments; n++) auxSegments[n] = segments[n];
-        segments = auxSegments;
     }     // finds all line segments containing 4 or more points
 
     private void findSegments(){
@@ -41,7 +51,14 @@ public class FastCollinearPoints {
                 exam[0] = sloPoints[0].point;
                 for(int d = 1, e = a; d < c+1; d++, e++) exam[d] = sloPoints[e].point;
                 insertionSort(exam);
-                if(exam[0] == sloPoints[0].point) segments[numberOfSegments++] = new LineSegment(exam[0], exam[c]);
+                if(exam[0] == sloPoints[0].point){
+                    Node old = lineSegments;
+                    lineSegments = new Node();
+                    lineSegments.segment = new LineSegment(exam[0], exam[3]);
+                    if(first == null) first = lineSegments;
+                    else old.next = lineSegments;
+                    numberOfSegments++;
+                }
                 a = b-1;
             }
         }
@@ -98,6 +115,12 @@ public class FastCollinearPoints {
     }        // the number of line segments
 
     public LineSegment[] segments(){
+        LineSegment[] segments = new LineSegment[numberOfSegments];
+        Node current = first;
+        for(int i = 0; i < numberOfSegments; i++){
+            segments[i] = current.segment;
+            current = current.next;
+        }
         return segments;
     }                // the line segments
 }
